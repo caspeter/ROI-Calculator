@@ -1,0 +1,22 @@
+{
+  "name": "angular-drill",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "webdriver-manager update",
+    "test": "NODE_ENV=test protractor test/conf.js",
+    "start": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.5",
+    "express": "^4.14.0",
+    "mocha": "^2.5.3",
+    "protractor": "^4.0.13"
+  },
+  "dependencies": {
+    "angular": "^1.6.0"
+  }
+}
