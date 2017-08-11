@@ -12,11 +12,18 @@
     function RevenueController() {
         var vm = this;
 
-        //on start do this
-        vm.$onInit = function() {
+        vm.$onInit = onInit;
+        vm.submitNewRevenue = submitNewRevenue;
+
+        function onInit() {
           console.log('Loaded');
+          vm.revenues= [];
+          vm.newRev = {};
         }
 
+        function submitNewRevenue(){
+          console.log(vm.newRev);
+        }
 
     }
 })();
