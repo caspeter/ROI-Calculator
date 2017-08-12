@@ -19,6 +19,10 @@
       vm.revenues = [];
       vm.newRev = {};
       vm.newExpense = {};
+      vm.totalOneTimeRevenue = 0;
+      vm.totalMonthlyRevenue = 0;
+      vm.totalOneTimeExpense = 0;
+      vm.totalMonthlyExpense = 0;
       vm.allRev = [
         {
           description: 'text',
@@ -46,13 +50,26 @@
       vm.allRev.push(vm.newRev);
       console.log(vm.allRev);
       vm.newRev = {};
+      vm.totalOneTimeRevenue = calculateTotals(vm.allRev, 'oneTime');
+      vm.totalMonthlyRevenue = calculateTotals(vm.allRev, 'monthly');
     }
 
     function submitNewExpense() {
       vm.allExpense.push(vm.newExpense);
       console.log(vm.allExpense);
       vm.newExpense = {};
+      vm.totalOneTimeExpense = calculateTotals(vm.allExpense, 'oneTime');
+      vm.totalMonthlyExpense = calculateTotals(vm.allExpense, 'monthly');
     }
+
+    function calculateTotals(array, frequency){
+      let total = 0;
+      for (var i = 0; i < array.length; i++) {
+        total += array[i][frequency];
+        console.log(total);
+      }
+      return total;
+    };
 
   }
 })();
