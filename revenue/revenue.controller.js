@@ -58,10 +58,14 @@
     }
 
     function submitNewRevenue() {
-      vm.allRev.push(vm.newRev);
-      console.log(vm.allRev);
-      vm.newRev = {};
-      recalculate();
+      if (vm.newRev.description === undefined) {
+        console.log('error');
+      } else {
+        vm.allRev.push(vm.newRev);
+        console.log(vm.allRev);
+        vm.newRev = {};
+        recalculate();
+      }
     }
 
     function submitNewExpense() {
@@ -81,15 +85,13 @@
     };
 
     function calculateMonthlyContributionProfit(){
-      console.log('run calc monthly contr');
       //Monthly Contribution Profit = Monthly Revenue – Monthly Expenses
-      console.log(' calculateMonthlyContributionProfit ', vm.totalMonthlyRevenue - vm.totalMonthlyExpense);
       return vm.totalMonthlyRevenue - vm.totalMonthlyExpense;
     }
 
     function totalContributionProfit() {
       //•	Total Contribution Profit = Total Revenue – Total Expenses
-      return vm.totalRevenue - vm.totalExpense;
+      return (vm.totalRevenue - vm.totalExpense);
     }
 
     function calculateContributionMargin(){

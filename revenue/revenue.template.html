@@ -35,8 +35,8 @@
   <tbody>
     <tr ng-repeat="item in $ctrl.allRev">
       <td>{{item.description}}</td>
-      <td>{{item.oneTime}}</td>
-      <td>{{item.monthly}}</td>
+      <td>$ {{item.oneTime}}</td>
+      <td>$ {{item.monthly}}</td>
       <td><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
     </tr>
   </tbody>
@@ -79,8 +79,8 @@
   <tbody>
     <tr ng-repeat="item in $ctrl.allExpense">
       <td>{{item.description}}</td>
-      <td>{{item.oneTime}}</td>
-      <td>{{item.monthly}}</td>
+      <td>$ {{item.oneTime}}</td>
+      <td>$ {{item.monthly}}</td>
       <td><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
     </tr>
   </tbody>
@@ -104,21 +104,26 @@
 <tbody>
   <tr>
     <td>Revenue</td>
-    <td>${{$ctrl.totalOneTimeRevenue}}</td>
-    <td>${{$ctrl.totalMonthlyRevenue}}</td>
-    <td>${{$ctrl.totalRevenue}}</td>
+    <td>$ {{$ctrl.totalOneTimeRevenue}}</td>
+    <td>$ {{$ctrl.totalMonthlyRevenue}}</td>
+    <td>$ {{$ctrl.totalRevenue}}</td>
   </tr>
   <tr>
     <td>Expenses</td>
-    <td>${{$ctrl.totalOneTimeExpense}}</td>
-    <td>${{$ctrl.totalMonthlyExpense}}</td>
-    <td>${{$ctrl.totalExpense}}</td>
+    <td>$ {{$ctrl.totalOneTimeExpense}}</td>
+    <td>$ {{$ctrl.totalMonthlyExpense}}</td>
+    <td>$ {{$ctrl.totalExpense}}</td>
   </tr>
+  <tr>
+    <td></td>
+    <td>Contribution Profit</td>
+    <td>$ {{$ctrl.monthlyContributionProfit}}</td>
+    <td>$ {{$ctrl.contributionProfit}}</td>
 </tbody>
 
 </table>
 
-Monthly Contribution Profit ${{$ctrl.monthlyContributionProfit}}
+<!-- Monthly Contribution Profit ${{$ctrl.monthlyContributionProfit}} -->
 <br>
 Total Contribution Profit $ {{$ctrl.contributionProfit}}
 <br>
