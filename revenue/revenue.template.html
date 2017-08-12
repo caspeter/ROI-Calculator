@@ -104,16 +104,18 @@
     <td>Revenue</td>
     <td>${{$ctrl.totalOneTimeRevenue}}</td>
     <td>${{$ctrl.totalMonthlyRevenue}}</td>
-    <td>${{$ctrl.totalMonthlyRevenue + $ctrl.totalOneTimeRevenue}}</td>
+    <td>${{($ctrl.totalMonthlyRevenue*12) + $ctrl.totalOneTimeRevenue}}</td>
   </tr>
   <tr>
     <td>Expenses</td>
     <td>${{$ctrl.totalOneTimeExpense}}</td>
     <td>${{$ctrl.totalMonthlyExpense}}</td>
-    <td>${{$ctrl.totalMonthlyExpense + $ctrl.totalOneTimeExpense}}</td>
+    <td>${{($ctrl.totalMonthlyExpense*12) + $ctrl.totalOneTimeExpense}}</td>
   </tr>
 </tbody>
 
 </table>
+
+
 
 </main>
