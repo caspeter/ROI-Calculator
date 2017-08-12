@@ -89,6 +89,8 @@
 <br>
 <hr>
 
+<h2>Totals</h2>
+
 <table class="table">
 
 <thead>
@@ -104,18 +106,24 @@
     <td>Revenue</td>
     <td>${{$ctrl.totalOneTimeRevenue}}</td>
     <td>${{$ctrl.totalMonthlyRevenue}}</td>
-    <td>${{($ctrl.totalMonthlyRevenue*12) + $ctrl.totalOneTimeRevenue}}</td>
+    <td>${{$ctrl.totalRevenue}}</td>
   </tr>
   <tr>
     <td>Expenses</td>
     <td>${{$ctrl.totalOneTimeExpense}}</td>
     <td>${{$ctrl.totalMonthlyExpense}}</td>
-    <td>${{($ctrl.totalMonthlyExpense*12) + $ctrl.totalOneTimeExpense}}</td>
+    <td>${{$ctrl.totalExpense}}</td>
   </tr>
 </tbody>
 
 </table>
 
-
+Monthly Contribution Profit ${{$ctrl.monthlyContributionProfit}}
+<br>
+Total Contribution Profit $ {{$ctrl.contributionProfit}}
+<br>
+Contribution Margin {{$ctrl.contributionMargin}}%
+<br>
+Captial ROI (Months) = {{$ctrl.capitalROI}}
 
 </main>
