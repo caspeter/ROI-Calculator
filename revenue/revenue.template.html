@@ -96,7 +96,7 @@
     <th></th>
     <th>One Time</th>
     <th>Monthly</th>
-    <th></th>
+    <th>Total</th>
   </tr>
 </thead>
 <tbody>
@@ -104,11 +104,13 @@
     <td>Revenue</td>
     <td>${{$ctrl.totalOneTimeRevenue}}</td>
     <td>${{$ctrl.totalMonthlyRevenue}}</td>
+    <td>${{$ctrl.totalMonthlyRevenue + $ctrl.totalOneTimeRevenue}}</td>
   </tr>
   <tr>
     <td>Expenses</td>
     <td>${{$ctrl.totalOneTimeExpense}}</td>
     <td>${{$ctrl.totalMonthlyExpense}}</td>
+    <td>${{$ctrl.totalMonthlyExpense + $ctrl.totalOneTimeExpense}}</td>
   </tr>
 </tbody>
 

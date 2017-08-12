@@ -50,17 +50,16 @@
       vm.allRev.push(vm.newRev);
       console.log(vm.allRev);
       vm.newRev = {};
-      vm.totalOneTimeRevenue = calculateTotals(vm.allRev, 'oneTime');
-      vm.totalMonthlyRevenue = calculateTotals(vm.allRev, 'monthly');
+      recalculateTotals();
     }
 
     function submitNewExpense() {
       vm.allExpense.push(vm.newExpense);
       console.log(vm.allExpense);
       vm.newExpense = {};
-      vm.totalOneTimeExpense = calculateTotals(vm.allExpense, 'oneTime');
-      vm.totalMonthlyExpense = calculateTotals(vm.allExpense, 'monthly');
+      recalculateTotals();
     }
+
 
     function calculateTotals(array, frequency){
       let total = 0;
@@ -70,6 +69,13 @@
       }
       return total;
     };
+
+    function recalculateTotals() {
+      vm.totalOneTimeExpense = calculateTotals(vm.allExpense, 'oneTime');
+      vm.totalMonthlyExpense = calculateTotals(vm.allExpense, 'monthly');
+      vm.totalOneTimeRevenue = calculateTotals(vm.allRev, 'oneTime');
+      vm.totalMonthlyRevenue = calculateTotals(vm.allRev, 'monthly');
+    }
 
   }
 })();
