@@ -1,24 +1,26 @@
 <main class="container">
 <h2>Revenue</h2>
+<div class="row">
   <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewRevenue($ctrl.newRev)">
-    <div class="form-group">
+    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
         <label for="description">Description </label>
         <input class="form-control" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description" required ng-minlength="3">
       </div>
-    <div class="form-group">
+    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
         <label for="oneTime">One Time </label>
-        <input class="form-control" id="one-timeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" required>
+        <input type="number" class="form-control" id="one-timeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" required>
       </div>
-    <div class="form-group">
+    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
         <label for="monthlyRevenueInput">Monthly Revenue</label>
-        <input class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly" required>
+        <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly" required>
       </div>
-      <div class="form-group">
+      <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
         <button type="submit" class="btn btn-primary">
-          Add Revenue
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
   </form>
+</div>
 
   <table class="table">
 
@@ -27,13 +29,63 @@
       <th>Description</th>
       <th>One Time</th>
       <th>Monthly</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-
+    <tr ng-repeat="item in $ctrl.allRev">
+      <td>{{item.description}}</td>
+      <td>{{item.oneTime}}</td>
+      <td>{{item.monthly}}</td>
+      <td><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
     </tr>
   </tbody>
 
 </table>
+
+<h2>Expenses</h2>
+<div class="row">
+  <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewExpense($ctrl.newExpense)">
+    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+        <label for="description">Description </label>
+        <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" required ng-minlength="3">
+      </div>
+    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
+        <label for="oneTime">One Time </label>
+        <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" required>
+      </div>
+    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
+        <label for="monthlyExpenseInput">Monthly Revenue</label>
+        <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" required>
+      </div>
+      <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
+        <button type="submit" class="btn btn-primary">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+      </div>
+  </form>
+</div>
+
+  <table class="table">
+
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>One Time</th>
+      <th>Monthly</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in $ctrl.allExpense">
+      <td>{{item.description}}</td>
+      <td>{{item.oneTime}}</td>
+      <td>{{item.monthly}}</td>
+      <td><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+    </tr>
+  </tbody>
+
+</table>
+
+
 </main>
