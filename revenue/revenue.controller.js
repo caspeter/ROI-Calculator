@@ -13,6 +13,7 @@
     vm.$onInit = onInit;
     vm.submitNewRevenue = submitNewRevenue;
     vm.submitNewExpense = submitNewExpense;
+    vm.removeLine = removeLine;
 
     function onInit() {
       console.log('Loaded');
@@ -75,6 +76,17 @@
       recalculate();
     }
 
+    function removeLine(array, line) {
+      let indexNumber = 0;
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].description === line.description && array[i].oneTime === line.oneTime && array[i].monthly === line.monthly) {
+          indexNumber = array[i];
+        }
+      }
+      array.splice(indexNumber, 1);
+      recalculate();
+    }
+
 
     function calculateTotals(array, frequency){
       let total = 0;
@@ -96,12 +108,21 @@
 
     function calculateContributionMargin(){
       //Contribution Margin = Total Contribution Profit / Total Revenue
-      return vm.contributionProfit/vm.totalRevenue * 100;
+      if (vm.totalRevenue == 0) {
+        return 0;
+      } else {
+        return vm.contributionProfit/vm.totalRevenue * 100;
+      }
     }
 
     function calculateCapitalROI() {
       //Capital ROI (Months) = (One-Time Expenses – One-Time Revenue) / Monthly Contribution Profit
-      return (vm.totalOneTimeExpense - vm.totalOneTimeRevenue) / vm.monthlyContributionProfit;
+      console.log((vm.totalOneTimeExpense - vm.totalOneTimeRevenue) / vm.monthlyContributionProfit);
+      if (vm.monthlyContributionProfit == 0) {
+        return 0;
+      } else {
+        return (vm.totalOneTimeExpense - vm.totalOneTimeRevenue) / vm.monthlyContributionProfit;
+      }
     }
 
     function recalculate() {
