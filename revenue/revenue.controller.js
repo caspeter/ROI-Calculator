@@ -61,6 +61,26 @@
     function submitNewRevenue() {
       if (vm.newRev.description === undefined) {
         console.log('error');
+      } else if (!vm.newRev.oneTime && !vm.newRev.monthly) {
+        console.log('money error');
+      } else if (!vm.newRev.oneTime) {
+        console.log('no one time');
+        vm.allRev.push({
+          description: vm.newRev.description,
+          oneTime: 0,
+          monthly: vm.newRev.monthly
+        })
+        vm.newRev = {};
+        recalculate();
+      } else if (!vm.newRev.monthly) {
+        console.log('no monthly');
+        vm.allRev.push({
+          description: vm.newRev.description,
+          oneTime: vm.newRev.oneTime,
+          monthly: 0
+        })
+        vm.newRev = {};
+        recalculate();
       } else {
         vm.allRev.push(vm.newRev);
         console.log(vm.allRev);
