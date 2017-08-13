@@ -80,7 +80,7 @@
       let indexNumber = 0;
       for (var i = 0; i < array.length; i++) {
         if (array[i].description === line.description && array[i].oneTime === line.oneTime && array[i].monthly === line.monthly) {
-          indexNumber = array[i];
+          indexNumber = i;
         }
       }
       array.splice(indexNumber, 1);
@@ -111,13 +111,12 @@
       if (vm.totalRevenue == 0) {
         return 0;
       } else {
-        return vm.contributionProfit/vm.totalRevenue * 100;
+        return Math.round(vm.contributionProfit/vm.totalRevenue * 100);
       }
     }
 
     function calculateCapitalROI() {
       //Capital ROI (Months) = (One-Time Expenses – One-Time Revenue) / Monthly Contribution Profit
-      console.log((vm.totalOneTimeExpense - vm.totalOneTimeRevenue) / vm.monthlyContributionProfit);
       if (vm.monthlyContributionProfit == 0) {
         return 0;
       } else {
