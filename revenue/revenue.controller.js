@@ -11,8 +11,7 @@
     var vm = this;
 
     vm.$onInit = onInit;
-    vm.submitNewRevenue = submitNewRevenue;
-    vm.submitNewExpense = submitNewExpense;
+    vm.submitNewItem = submitNewItem;
     vm.removeLine = removeLine;
 
     function onInit() {
@@ -58,41 +57,36 @@
       recalculate();
     }
 
-    function submitNewRevenue() {
-      if (vm.newRev.description === undefined) {
+    function submitNewItem(location, newItem) {
+      if (newItem.description === undefined) {
         console.log('error');
-      } else if (!vm.newRev.oneTime && !vm.newRev.monthly) {
+      } else if (!newItem.oneTime && !newItem.monthly) {
         console.log('money error');
-      } else if (!vm.newRev.oneTime) {
+      } else if (!newItem.oneTime) {
         console.log('no one time');
-        vm.allRev.push({
-          description: vm.newRev.description,
+        location.push({
+          description: newItem.description,
           oneTime: 0,
-          monthly: vm.newRev.monthly
+          monthly: newItem.monthly
         })
-        vm.newRev = {};
-        recalculate();
-      } else if (!vm.newRev.monthly) {
+        location = {};
+      } else if (!newItem.monthly) {
         console.log('no monthly');
-        vm.allRev.push({
-          description: vm.newRev.description,
-          oneTime: vm.newRev.oneTime,
+        location.push({
+          description: newItem.description,
+          oneTime: newItem.oneTime,
           monthly: 0
         })
-        vm.newRev = {};
-        recalculate();
+        location = {};
       } else {
-        vm.allRev.push(vm.newRev);
-        console.log(vm.allRev);
-        vm.newRev = {};
-        recalculate();
+        location.push(newItem);
+        console.log(location);
       }
-    }
-
-    function submitNewExpense() {
-      vm.allExpense.push(vm.newExpense);
-      console.log(vm.allExpense);
-      vm.newExpense = {};
+      if (newItem == vm.newRev) {
+        vm.newRev = {};
+      } else if (newItem == vm.newExpense) {
+        vm.newExpense = {};
+      }
       recalculate();
     }
 

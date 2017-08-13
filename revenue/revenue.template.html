@@ -1,7 +1,7 @@
 <main class="container">
 <h2>Revenue</h2>
 <div class="row">
-  <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewRevenue($ctrl.newRev)">
+  <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
     <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
         <label for="description">Description </label>
         <input class="form-control" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description" required ng-minlength="3">
@@ -45,7 +45,7 @@
 
 <h2>Expenses</h2>
 <div class="row">
-  <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewExpense($ctrl.newExpense)">
+  <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
     <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
         <label for="description">Description </label>
         <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" required ng-minlength="3">
