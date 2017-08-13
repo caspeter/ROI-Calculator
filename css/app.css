@@ -8,12 +8,25 @@ main.container {
 
 .add-button {
   position: absolute;
-    bottom: -4em;
+  bottom: -4em;
 }
 
-@media screen and (max-width:770px){
-.add-button{
-position: relative;
-bottom: auto
+.calc-display {
+  text-align: center;
+  top: 3em;
 }
+
+.test-animate.ng-animate{
+  transition:0.5s linear all;
+}
+
+@media screen and (max-width:767px) {
+  .calc-display {
+    text-align: center;
+    top: 0;
+  }
+}
+
+.has-error {
+  color: red;
 }

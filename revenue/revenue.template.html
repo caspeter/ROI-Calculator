@@ -2,23 +2,23 @@
   <div class="row">
 <div class="col-lg-6">
 
-<h2>Revenue</h2>
+<h2 class="test-animate">Revenue</h2>
 <div class="row">
   <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
-    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
-        <label for="description">Description </label>
-        <input class="form-control" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description" required ng-minlength="3">
+    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <label for="descriptionRevenueInput" ng-class="{'has-error': ($ctrl.newRevenueForm.descriptionRevenueInput.$invalid && $ctrl.newRevenueForm.descriptionRevenueInput.$touched) || ($ctrl.newRev.oneTime != undefined) && ($ctrl.newRev.monthly != undefined)}">Description </label>
+        <input class="form-control" name="descriptionRevenueInput"  id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description" required ng-minlength="3">
       </div>
-    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
-        <label for="oneTime">One Time </label>
-        <input type="number" step=".01" class="form-control" id="one-timeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" required>
+    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+        <label for="oneTimeRevenueInput">One Time </label>
+        <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" required>
       </div>
-    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
+    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
         <label for="monthlyRevenueInput">Monthly Revenue</label>
         <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly" required>
       </div>
-      <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
-        <button type="submit" class="btn btn-primary add-button">
+      <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <button type="submit" class="btn btn-primary add-button" ng-disabled="$ctrl.newRevenueForm.$invalid">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
@@ -52,20 +52,20 @@
 <h2>Expenses</h2>
 <div class="row">
   <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
-    <div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
-        <label for="description">Description </label>
+    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <label for="descriptionExpenseInput">Description </label>
         <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" required ng-minlength="3">
       </div>
-    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
+    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
       <label for="one-timeExpenseInput">One Time </label>
-        <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" required>
+        <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined">
       </div>
-    <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
+    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
         <label for="monthlyExpenseInput">Monthly Revenue</label>
-        <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" required>
+        <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined">
       </div>
-      <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
-        <button type="submit" class="btn btn-primary add-button">
+      <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <button type="submit" class="btn btn-primary add-button" ng-disabled="$ctrl.newExpenseForm.$invalid">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
@@ -96,9 +96,13 @@
 
 </div>
 
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 <h2>Totals</h2>
 
 <table class="table">
+
 
 <thead>
   <tr>
@@ -130,13 +134,15 @@
 </tbody>
 
 </table>
+</div>
 
-<!-- Monthly Contribution Profit ${{$ctrl.monthlyContributionProfit}} -->
-<br>
-Total Contribution Profit $ {{$ctrl.contributionProfit}}
-<br>
-Contribution Margin {{$ctrl.contributionMargin}}%
-<br>
-Captial ROI (Months) = {{$ctrl.capitalROI}}
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 calc-display">
 
-</main>
+<br>
+<h4>Total Contribution Profit ${{$ctrl.contributionProfit}}</h4>
+<br>
+<h4>Contribution Margin {{$ctrl.contributionMargin}}%</h4>
+<br>
+<h4>Captial ROI (Months) = {{$ctrl.capitalROI}}</h4>
+
+</div>

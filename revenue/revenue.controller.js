@@ -29,6 +29,7 @@
       vm.contributionProfit = 0;
       vm.contributionMargin = 0;
       vm.capitalROI = 0;
+      vm.revDescError = true;
       vm.allRev = [
         {
           description: 'text1',
