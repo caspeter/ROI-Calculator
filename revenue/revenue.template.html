@@ -1,4 +1,7 @@
 <main class="container">
+  <div class="row">
+<div class="col-lg-6">
+
 <h2>Revenue</h2>
 <div class="row">
   <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
@@ -8,21 +11,21 @@
       </div>
     <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
         <label for="oneTime">One Time </label>
-        <input type="number" class="form-control" id="one-timeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" required>
+        <input type="number" step=".01" class="form-control" id="one-timeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" required>
       </div>
     <div class="form-group col-xs-10 col-sm-4 col-md-3 col-lg-3">
         <label for="monthlyRevenueInput">Monthly Revenue</label>
         <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly" required>
       </div>
       <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary add-button">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
   </form>
 </div>
 
-  <table class="table">
+  <table class="table table-hover">
 
   <thead>
     <tr>
@@ -42,6 +45,9 @@
   </tbody>
 
 </table>
+</div>
+
+<div class="col-lg-6">
 
 <h2>Expenses</h2>
 <div class="row">
@@ -59,14 +65,14 @@
         <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" required>
       </div>
       <div class="form-group col-xs-6 col-sm-1 col-md-1 col-lg-1">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary add-button">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
       </div>
   </form>
 </div>
 
-  <table class="table">
+  <table class="table table-hover">
 
   <thead>
     <tr>
@@ -86,8 +92,9 @@
   </tbody>
 
 </table>
-<br>
-<hr>
+</div>
+
+</div>
 
 <h2>Totals</h2>
 

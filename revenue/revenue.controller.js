@@ -107,7 +107,7 @@
       for (var i = 0; i < array.length; i++) {
         total += array[i][frequency];
       }
-      return total;
+      return parseInt(total.toFixed(2));
     };
 
     function calculateMonthlyContributionProfit(){
@@ -116,7 +116,7 @@
     }
 
     function totalContributionProfit() {
-      //•	Total Contribution Profit = Total Revenue – Total Expenses
+      //Total Contribution Profit = Total Revenue – Total Expenses
       return (vm.totalRevenue - vm.totalExpense);
     }
 

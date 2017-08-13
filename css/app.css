@@ -5,3 +5,15 @@
 main.container {
   margin-bottom: 4em;
 }
+
+.add-button {
+  position: absolute;
+    bottom: -4em;
+}
+
+@media screen and (max-width:770px){
+.add-button{
+position: relative;
+bottom: auto
+}
+}
