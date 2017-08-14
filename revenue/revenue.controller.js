@@ -29,7 +29,7 @@
       vm.contributionProfit = 0;
       vm.contributionMargin = 0;
       vm.capitalROI = 0;
-      vm.revDescError = true;
+      vm.errors = {};
       vm.allRev = [
         {
           description: 'text1',
@@ -39,7 +39,7 @@
           description: 'text2',
           oneTime: 50,
           monthly: 25
-        } ,{
+        }, {
           description: 'text3',
           oneTime: 25,
           monthly: 85
@@ -47,48 +47,62 @@
       ];
       vm.allExpense = [
         {
-        description: 'expense1',
-        oneTime: 500,
-        monthly: 20
-      }, {
-        description: 'expense2',
-        oneTime: 200,
-        monthly: 40
-      }];
+          description: 'expense1',
+          oneTime: 500,
+          monthly: 20
+        }, {
+          description: 'expense2',
+          oneTime: 200,
+          monthly: 40
+        }
+      ];
       recalculate();
     }
 
     function submitNewItem(location, newItem) {
-      if (newItem.description === undefined) {
-        console.log('error');
-      } else if (!newItem.oneTime && !newItem.monthly) {
-        console.log('money error');
-      } else if (!newItem.oneTime) {
-        console.log('no one time');
-        location.push({
-          description: newItem.description,
-          oneTime: 0,
-          monthly: newItem.monthly
-        })
-        location = {};
-      } else if (!newItem.monthly) {
-        console.log('no monthly');
-        location.push({
-          description: newItem.description,
-          oneTime: newItem.oneTime,
-          monthly: 0
-        })
-        location = {};
-      } else {
-        location.push(newItem);
-        console.log(location);
+      //if there isn't a description throw an error
+      if (newItem.description === undefined || (newItem.description == '')) {
+        if (newItem == vm.newRev) {
+          vm.errors.descriptionRevenue = true;
+        } else {
+          vm.errors.descriptionExpenses = true;
+        }
       }
-      if (newItem == vm.newRev) {
-        vm.newRev = {};
-      } else if (newItem == vm.newExpense) {
-        vm.newExpense = {};
+      //if there isn't a number in either of the number entries throw an error
+      if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+        if (newItem == vm.newRev) {
+          vm.errors.revenueInputs = true;
+        } else {
+          vm.errors.expensesInputs = true;
+        }
       }
-      recalculate();
+      //if the numbers entered aren't real number or are negative then send an error
+      else if () {
+        vm.errors = {}
+        if (newItem == vm.newRev) {
+          vm.errors.negativeRevenue = true;
+        } else {
+          vm.errors.negativeExpenses = true;
+        }
+      }
+      //if there are values in the required fields run this
+      if (newItem.description && (newItem.oneTime || newItem.monthly)) {
+        if (!newItem.oneTime) {
+          location.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly})
+        } else if (!newItem.monthly) {
+          location.push({description: newItem.description, oneTime: newItem.oneTime, monthly: 0})
+        } else {
+          location.push(newItem);
+          console.log(location);
+        }
+        if (newItem == vm.newRev) {
+          vm.newRev = {};
+        } else if (newItem == vm.newExpense) {
+          vm.newExpense = {};
+        }
+        recalculate();
+        vm.errors = {};
+      }
     }
 
     function removeLine(array, line) {
@@ -102,8 +116,7 @@
       recalculate();
     }
 
-
-    function calculateTotals(array, frequency){
+    function calculateTotals(array, frequency) {
       let total = 0;
       for (var i = 0; i < array.length; i++) {
         total += array[i][frequency];
@@ -111,7 +124,7 @@
       return parseInt(total.toFixed(2));
     };
 
-    function calculateMonthlyContributionProfit(){
+    function calculateMonthlyContributionProfit() {
       //Monthly Contribution Profit = Monthly Revenue – Monthly Expenses
       return vm.totalMonthlyRevenue - vm.totalMonthlyExpense;
     }
@@ -121,12 +134,12 @@
       return (vm.totalRevenue - vm.totalExpense);
     }
 
-    function calculateContributionMargin(){
+    function calculateContributionMargin() {
       //Contribution Margin = Total Contribution Profit / Total Revenue
       if (vm.totalRevenue == 0) {
         return 0;
       } else {
-        return Math.round(vm.contributionProfit/vm.totalRevenue * 100);
+        return Math.round(vm.contributionProfit / vm.totalRevenue * 100);
       }
     }
 
@@ -144,12 +157,12 @@
       vm.totalMonthlyExpense = calculateTotals(vm.allExpense, 'monthly');
       vm.totalOneTimeRevenue = calculateTotals(vm.allRev, 'oneTime');
       vm.totalMonthlyRevenue = calculateTotals(vm.allRev, 'monthly');
-      vm.totalRevenue = (vm.totalMonthlyRevenue*12) + vm.totalOneTimeRevenue;
-      vm.totalExpense = (vm.totalMonthlyExpense*12) + vm.totalOneTimeExpense;
+      vm.totalRevenue = (vm.totalMonthlyRevenue * 12) + vm.totalOneTimeRevenue;
+      vm.totalExpense = (vm.totalMonthlyExpense * 12) + vm.totalOneTimeExpense;
       vm.monthlyContributionProfit = calculateMonthlyContributionProfit();
       vm.contributionProfit = totalContributionProfit();
-      vm.contributionMargin = Math.round(calculateContributionMargin() * 100)/100;
-      vm.capitalROI = Math.round(calculateCapitalROI()*10)/10;
+      vm.contributionMargin = Math.round(calculateContributionMargin() * 100) / 100;
+      vm.capitalROI = Math.round(calculateCapitalROI() * 10) / 10;
     }
 
   }

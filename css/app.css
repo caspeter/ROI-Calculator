@@ -30,3 +30,9 @@ main.container {
 .has-error {
   color: red;
 }
+
+.alert{
+  position: fixed;
+  margin-top: 1em;
+  z-index: 100;
+}
