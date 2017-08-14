@@ -86,7 +86,7 @@
         }
       }
       //if the numbers entered aren't real number or are negative then send an error
-      else if () {
+      else {
         vm.errors = {}
         if (newItem == vm.newRev) {
           vm.errors.negativeRevenue = true;
