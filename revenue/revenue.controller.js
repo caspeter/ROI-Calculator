@@ -29,7 +29,16 @@
       vm.contributionProfit = 0;
       vm.contributionMargin = 0;
       vm.capitalROI = 0;
-      vm.errors = {};
+      vm.revenueErrors = {
+        description: false,
+        atLeastOne: false,
+        correctInput: false
+      };
+      vm.expenseErrors = {
+        description: false,
+        atLeastOne: false,
+        correctInput: false
+      };
       vm.allRev = [
         {
           description: 'text1',
