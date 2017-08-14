@@ -69,37 +69,66 @@
     }
 
     function submitNewItem(location, newItem) {
+      //if it is revenue
+      if (newItem == vm.newRev) {
+        //if there isn't a description throw an error
+        if (newItem.description === undefined || (newItem.description == '')) {
+          vm.revenueErrors.description = true;
+        } else {
+          vm.revenueErrors.description = false;
+        }
+        //if there isn't a number in either of the number entries throw an error
+        if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+          vm.revenueErrors.atLeastOne = true;
+        } else {
+          vm.revenueErrors.atLeastOne = false//if it is expense;
+        }
+
+      } else {
+        //if there isn't a description throw an error
+        if (newItem.description === undefined || (newItem.description == '')) {
+          vm.expenseErrors.description = true;
+        } else {
+          vm.expenseErrors.description = false;
+        }
+        //if there isn't a number in either of the number entries throw an error
+        if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+          vm.expenseErrors.atLeastOne = true;
+        } else {
+          vm.expenseErrors.atLeastOne = false;
+        }
+      }
+
       //if there isn't a description throw an error
-      if (newItem.description === undefined || (newItem.description == '')) {
-        if (newItem == vm.newRev) {
-          vm.errors.descriptionRevenue = true;
-        } else {
-          vm.errors.descriptionExpenses = true;
-        }
-      }
+      // if (newItem.description === undefined || (newItem.description == '')) {
+      //   if (newItem == vm.newRev) {
+      //     vm.errors.descriptionRevenue = true;
+      //   } else {
+      //     vm.errors.descriptionExpenses = true;
+      //   }
+      // }
       //if there isn't a number in either of the number entries throw an error
-      if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
-        if (newItem == vm.newRev) {
-          vm.errors.revenueInputs = true;
-        } else {
-          vm.errors.expensesInputs = true;
-        }
-      }
+      // if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+      //   if (newItem == vm.newRev) {
+      //     vm.errors.revenueInputs = true;
+      //   } else {
+      //     vm.errors.expensesInputs = true;
+      //   }
+      // }
       //if the numbers entered aren't real number or are negative then send an error
-      else {
-        vm.errors = {}
-        if (newItem == vm.newRev) {
-          vm.errors.negativeRevenue = true;
-        } else {
-          vm.errors.negativeExpenses = true;
-        }
-      }
+
       //if there are values in the required fields run this
       if (newItem.description && (newItem.oneTime || newItem.monthly)) {
         if (!newItem.oneTime) {
-          location.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly})
+          location.push({
+            description: newItem.description,
+            oneTime: 0,
+            monthly: newItem.monthly})
         } else if (!newItem.monthly) {
-          location.push({description: newItem.description, oneTime: newItem.oneTime, monthly: 0})
+          location.push({
+            description: newItem.description,
+            oneTime: newItem.oneTime,
+            monthly: 0})
         } else {
           location.push(newItem);
           console.log(location);
@@ -110,7 +139,6 @@
           vm.newExpense = {};
         }
         recalculate();
-        vm.errors = {};
       }
     }
 
