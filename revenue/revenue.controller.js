@@ -84,6 +84,30 @@
           vm.revenueErrors.atLeastOne = false//if it is expense;
         }
 
+        //if everything is happy run this
+        if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false && vm.revenueErrors.correctInput == false) {
+          if (!newItem.oneTime) {
+            location.push({
+              description: newItem.description,
+              oneTime: 0,
+              monthly: newItem.monthly})
+          } else if (!newItem.monthly) {
+            location.push({
+              description: newItem.description,
+              oneTime: newItem.oneTime,
+              monthly: 0})
+          } else {
+            location.push(newItem);
+            console.log(location);
+          }
+          if (newItem == vm.newRev) {
+            vm.newRev = {};
+          } else if (newItem == vm.newExpense) {
+            vm.newExpense = {};
+          }
+          recalculate();
+        }
+
       } else {
         //if there isn't a description throw an error
         if (newItem.description === undefined || (newItem.description == '')) {
@@ -96,6 +120,30 @@
           vm.expenseErrors.atLeastOne = true;
         } else {
           vm.expenseErrors.atLeastOne = false;
+        }
+
+        //if everything is happy run this
+        if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false && vm.expenseErrors.correctInput == false) {
+          if (!newItem.oneTime) {
+            location.push({
+              description: newItem.description,
+              oneTime: 0,
+              monthly: newItem.monthly})
+          } else if (!newItem.monthly) {
+            location.push({
+              description: newItem.description,
+              oneTime: newItem.oneTime,
+              monthly: 0})
+          } else {
+            location.push(newItem);
+            console.log(location);
+          }
+          if (newItem == vm.newRev) {
+            vm.newRev = {};
+          } else if (newItem == vm.newExpense) {
+            vm.newExpense = {};
+          }
+          recalculate();
         }
       }
 
@@ -118,28 +166,28 @@
       //if the numbers entered aren't real number or are negative then send an error
 
       //if there are values in the required fields run this
-      if (newItem.description && (newItem.oneTime || newItem.monthly)) {
-        if (!newItem.oneTime) {
-          location.push({
-            description: newItem.description,
-            oneTime: 0,
-            monthly: newItem.monthly})
-        } else if (!newItem.monthly) {
-          location.push({
-            description: newItem.description,
-            oneTime: newItem.oneTime,
-            monthly: 0})
-        } else {
-          location.push(newItem);
-          console.log(location);
-        }
-        if (newItem == vm.newRev) {
-          vm.newRev = {};
-        } else if (newItem == vm.newExpense) {
-          vm.newExpense = {};
-        }
-        recalculate();
-      }
+      // if (newItem.description && (newItem.oneTime || newItem.monthly)) {
+      //   if (!newItem.oneTime) {
+      //     location.push({
+      //       description: newItem.description,
+      //       oneTime: 0,
+      //       monthly: newItem.monthly})
+      //   } else if (!newItem.monthly) {
+      //     location.push({
+      //       description: newItem.description,
+      //       oneTime: newItem.oneTime,
+      //       monthly: 0})
+      //   } else {
+      //     location.push(newItem);
+      //     console.log(location);
+      //   }
+      //   if (newItem == vm.newRev) {
+      //     vm.newRev = {};
+      //   } else if (newItem == vm.newExpense) {
+      //     vm.newExpense = {};
+      //   }
+      //   recalculate();
+      // }
     }
 
     function removeLine(array, line) {
