@@ -68,6 +68,11 @@
       recalculate();
     }
 
+    function checkValidNumber(number) {
+      const checkValid = /^\d*\.?\d{0,2}$/;
+      return checkValid.test(number);
+    }
+
     function submitNewItem(location, newItem) {
       //if it is revenue
       if (newItem == vm.newRev) {
@@ -80,9 +85,26 @@
         //if there isn't a number in either of the number entries throw an error
         if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
           vm.revenueErrors.atLeastOne = true;
-        } else {
-          vm.revenueErrors.atLeastOne = false//if it is expense;
         }
+        //if the number are invalid
+        //if onetime is valid or blank, be true. if monthly is valid or blank be true. if both are true, clear all errors, if they are false they will be turned true with the ! and will set the correct input error
+        else if (!((checkValidNumber(newItem.oneTime) || newItem.oneTime == '') && (checkValidNumber(newItem.monthly) || newItem.monthly == ''))) {
+          vm.revenueErrors.correctInput = true;
+          vm.revenueErrors.atLeastOne = false;
+        }
+        else {
+          vm.revenueErrors.atLeastOne = false;
+          vm.revenueErrors.correctInput = false;
+        }
+
+        // if ((checkValidNumber(newItem.oneTime) || newItem.oneTime == '') && (checkValidNumber(newItem.monthly) || newItem.monthly == '')) {
+        //   console.log('both look good');
+        //   vm.revenueErrors.correctInput = false;
+        // } else {
+        //   vm.revenueErrors.correctInput = true;
+        //   //dont want errors over lapping eachother
+        //   vm.revenueErrors.atLeastOne = false;
+        // }
 
         //if everything is happy run this
         if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false && vm.revenueErrors.correctInput == false) {
@@ -107,7 +129,7 @@
           }
           recalculate();
         }
-
+        //for EXPENSE
       } else {
         //if there isn't a description throw an error
         if (newItem.description === undefined || (newItem.description == '')) {
@@ -146,48 +168,6 @@
           recalculate();
         }
       }
-
-      //if there isn't a description throw an error
-      // if (newItem.description === undefined || (newItem.description == '')) {
-      //   if (newItem == vm.newRev) {
-      //     vm.errors.descriptionRevenue = true;
-      //   } else {
-      //     vm.errors.descriptionExpenses = true;
-      //   }
-      // }
-      //if there isn't a number in either of the number entries throw an error
-      // if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
-      //   if (newItem == vm.newRev) {
-      //     vm.errors.revenueInputs = true;
-      //   } else {
-      //     vm.errors.expensesInputs = true;
-      //   }
-      // }
-      //if the numbers entered aren't real number or are negative then send an error
-
-      //if there are values in the required fields run this
-      // if (newItem.description && (newItem.oneTime || newItem.monthly)) {
-      //   if (!newItem.oneTime) {
-      //     location.push({
-      //       description: newItem.description,
-      //       oneTime: 0,
-      //       monthly: newItem.monthly})
-      //   } else if (!newItem.monthly) {
-      //     location.push({
-      //       description: newItem.description,
-      //       oneTime: newItem.oneTime,
-      //       monthly: 0})
-      //   } else {
-      //     location.push(newItem);
-      //     console.log(location);
-      //   }
-      //   if (newItem == vm.newRev) {
-      //     vm.newRev = {};
-      //   } else if (newItem == vm.newExpense) {
-      //     vm.newExpense = {};
-      //   }
-      //   recalculate();
-      // }
     }
 
     function removeLine(array, line) {
