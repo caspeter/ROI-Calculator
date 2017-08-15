@@ -8,8 +8,8 @@ main.container {
 
 .add-button {
   position: absolute;
-  bottom: -4em;
-  left: -.5em;
+  bottom: -4.75em;
+  left: -.2em;
 }
 
 .calc-display {
@@ -38,6 +38,15 @@ main.container {
   z-index: 100;
 }
 
-.trash-input{
+.info-icon{
+  z-index: 101;
+}
 
+.number-descriptions{
+  color: black;
+}
+
+.number-descriptions:hover{
+  text-decoration: none;
+  color: black;
 }

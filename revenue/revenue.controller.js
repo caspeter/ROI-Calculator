@@ -73,7 +73,7 @@
 
     function checkValidNumber(number) {
       const checkValid = /^\d*\.?\d{0,2}$/;
-      if (typeof number == 'string') {
+      if (typeof number == 'string' || number < 0 || number > 1000000001) {
         return false;
       } else {
         return checkValid.test(number);
@@ -95,6 +95,7 @@
         //if there isn't a number in either of the number entries throw an error
         if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
           console.log('nothing in either number inputs');
+          console.log(newItem.oneTime, newItem.monthly);
           vm.revenueErrors.atLeastOne = true;
           vm.revenueErrors.correctInput = false;
         } else {
@@ -127,7 +128,7 @@
                 monthly: 0});
                 recalculate(newItem);
             } else {
-              console.log('not balid input in one time');
+              console.log('not valid input in one time');
               vm.revenueErrors.correctInput = true;
             };
           } else {

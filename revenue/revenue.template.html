@@ -1,4 +1,4 @@
-<main class="container" ng-click="$ctrl.resetErrors('expense'), $ctrl.resetErrors('revenue')">
+<main class="container">
   <div class="row">
     <div class="col-lg-6">
 
@@ -8,23 +8,21 @@
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <label for="descriptionRevenueInput">Description
              </label>
-            <input class="form-control" name="descriptionRevenueInput" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description" ng-click="$ctrl.resetErrors('revenue')"
-            maxlength="30">
-            <p ng-if="$ctrl.revenueErrors.description" class="alert alert-danger">Please enter description</p>
+            <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Must be at least one character long.
+             Must be shorter than 30 characters." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+            <input class="form-control" name="descriptionRevenueInput" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description" ng-click="$ctrl.resetErrors('revenue')" maxlength="30">
+            <p ng-if="$ctrl.revenueErrors.description" class="alert alert-danger">Invalid description</p>
           </div>
           <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
             <label for="oneTimeRevenueInput">One Time </label>
-            <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" ng-click="$ctrl.resetErrors('revenue')"
-            min="0"
-            max="1,000,000,001">
-            <p ng-if="$ctrl.revenueErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
-            <p ng-if="$ctrl.revenueErrors.correctInput" class="alert alert-danger">Whoops, invalid revenue!</p>
+            <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Cannot be a negative number, cannot include letters,  decimals cannot exceed 2 places and cannot be over 1 billion per input." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+            <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" ng-click="$ctrl.resetErrors('revenue')">
+            <p ng-if="$ctrl.revenueErrors.atLeastOne || $ctrl.revenueErrors.correctInput" class="alert alert-danger">Invalid Input(s)</p>
           </div>
           <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <label for="monthlyRevenueInput">Monthly Revenue</label>
-            <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly" ng-click="$ctrl.resetErrors('revenue')"
-            min="0"
-            max="1,000,000,001">
+            <label for="monthlyRevenueInput">Monthly</label>
+            <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Cannot be a negative number, cannot include letters,  decimals cannot exceed 2 places and cannot be over 1 billion per input." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+            <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly" ng-click="$ctrl.resetErrors('revenue')">
           </div>
           <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
             <button type="submit" class="btn btn-primary add-button">
@@ -68,23 +66,21 @@
         <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <label for="descriptionExpenseInput">Description </label>
-            <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" ng-minlength="3" ng-click="$ctrl.resetErrors('expense')"
-            maxlength="30">
-            <p ng-if="$ctrl.expenseErrors.description" class="alert alert-danger">Please enter description</p>
+            <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Must be at least one character long.
+            Must be shorter than 30 characters." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+            <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" ng-minlength="3" ng-click="$ctrl.resetErrors('expense')" maxlength="30">
+            <p ng-if="$ctrl.expenseErrors.description" class="alert alert-danger">Invalid description</p>
           </div>
           <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
             <label for="one-timeExpenseInput">One Time </label>
-            <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined" ng-click="$ctrl.resetErrors('expense')"
-            min="0"
-            max="1,000,000,001">
-            <p ng-if="$ctrl.expenseErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
-            <p ng-if="$ctrl.expenseErrors.correctInput" class="alert alert-danger">Whoops, invalid expense!</p>
+            <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Cannot be a negative number, cannot include letters,  decimals cannot exceed 2 places and cannot be over 1 billion per input." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+            <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined" ng-click="$ctrl.resetErrors('expense')">
+            <p ng-if="$ctrl.expenseErrors.atLeastOne || $ctrl.expenseErrors.correctInput" class="alert alert-danger">Invalid Input(s)</p>
           </div>
           <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <label for="monthlyExpenseInput">Monthly Revenue</label>
-            <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined" ng-click="$ctrl.resetErrors('expense')"
-            min="0"
-            max="1,000,000,001">
+            <label for="monthlyExpenseInput">Monthly </label>
+            <button type="button" class="btn btn-link info-icon" data-toggle="tooltip" data-placement="bottom" title="Cannot be a negative number, cannot include letters,  decimals cannot exceed 2 places and cannot be over 1 billion per input." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+            <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined" ng-click="$ctrl.resetErrors('expense')">
           </div>
           <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
             <button type="submit" class="btn btn-primary add-button">
@@ -142,9 +138,15 @@
         <tbody>
           <tr>
             <td>Revenue</td>
-            <td>{{$ctrl.totalOneTimeRevenue | currency}}</td>
-            <td>{{$ctrl.totalMonthlyRevenue | currency}}</td>
-            <td>{{$ctrl.totalRevenue | currency}}</td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Sum of all one time revenues." onmouseenter="$(this).tooltip('show')">{{$ctrl.totalOneTimeRevenue | currency}}</a>
+              </td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Sum of all monthly revenues." onmouseenter="$(this).tooltip('show')">{{$ctrl.totalMonthlyRevenue | currency}}</a>
+              </td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Total monthly revenues multiplied by 12 months then added to total one time revenues." onmouseenter="$(this).tooltip('show')">{{$ctrl.totalRevenue | currency}}</a>
+              </td>
           </tr>
           <tr>
             <td>Expenses</td>
@@ -175,28 +177,28 @@
     </div>
   </div>
 
-<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal" ng-click="$ctrl.easterEgg = !$ctrl.easterEgg">Help</button>
+  <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal" ng-click="$ctrl.easterEgg = !$ctrl.easterEgg">Help</button>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog"  data-keyboard="false" data-backdrop="static">
-  <div class="modal-dialog">
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button ng-click="$ctrl.easterEgg = !$ctrl.easterEgg" type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Never Going to Give You Up</h4>
-      </div>
-      <div class="modal-body">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button ng-click="$ctrl.easterEgg = !$ctrl.easterEgg" type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Never Going to Give You Up</h4>
+        </div>
+        <div class="modal-body">
 
-        <iframe ng-if="$ctrl.easterEgg" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&cc_load_policy=1" frameborder="0" allowfullscreen></iframe>
+          <iframe ng-if="$ctrl.easterEgg" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&cc_load_policy=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.easterEgg = !$ctrl.easterEgg">Close</button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.easterEgg = !$ctrl.easterEgg">Close</button>
-      </div>
+
     </div>
-
   </div>
-</div>
 
 </main>
