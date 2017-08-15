@@ -164,4 +164,29 @@
 
     </div>
   </div>
+
+<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal" ng-click="$ctrl.easterEgg = !$ctrl.easterEgg">Help</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog"  data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button ng-click="$ctrl.easterEgg = !$ctrl.easterEgg" type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Never Going to Give You Up</h4>
+      </div>
+      <div class="modal-body">
+
+        <iframe ng-if="$ctrl.easterEgg" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&cc_load_policy=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.easterEgg = !$ctrl.easterEgg">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </main>
