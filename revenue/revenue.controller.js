@@ -221,7 +221,7 @@
       for (var i = 0; i < array.length; i++) {
         total += array[i][frequency];
       }
-      return parseInt(total.toFixed(2));
+      return total;
     };
 
     function calculateMonthlyContributionProfit() {
