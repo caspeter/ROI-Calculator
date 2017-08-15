@@ -7,18 +7,21 @@
         <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <label for="descriptionRevenueInput">Description </label>
-            <input class="form-control" name="descriptionRevenueInput" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description">
+            <input class="form-control" name="descriptionRevenueInput" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description"
+            ng-click="$ctrl.resetErrors('revenue')">
             <p ng-if="$ctrl.revenueErrors.description" class="alert alert-danger">Please enter description</p>
           </div>
           <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
             <label for="oneTimeRevenueInput">One Time </label>
-            <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime">
+            <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime"
+            ng-click="$ctrl.resetErrors('revenue')">
             <p ng-if="$ctrl.revenueErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
             <p ng-if="$ctrl.revenueErrors.correctInput" class="alert alert-danger">Whoops, invalid revenue!</p>
           </div>
           <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
             <label for="monthlyRevenueInput">Monthly Revenue</label>
-            <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly">
+            <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly"
+            ng-click="$ctrl.resetErrors('revenue')">
           </div>
           <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
             <button type="submit" class="btn btn-primary add-button">
@@ -62,18 +65,21 @@
         <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <label for="descriptionExpenseInput">Description </label>
-            <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" ng-minlength="3">
+            <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" ng-minlength="3"
+            ng-click="$ctrl.resetErrors('expense')">
             <p ng-if="$ctrl.expenseErrors.description" class="alert alert-danger">Please enter description</p>
           </div>
           <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
             <label for="one-timeExpenseInput">One Time </label>
-            <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined">
+            <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined"
+            ng-click="$ctrl.resetErrors('expense')">
             <p ng-if="$ctrl.expenseErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
             <p ng-if="$ctrl.expenseErrors.correctInput" class="alert alert-danger">Whoops, invalid expense!</p>
           </div>
           <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
             <label for="monthlyExpenseInput">Monthly Revenue</label>
-            <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined">
+            <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined"
+            ng-click="$ctrl.resetErrors('expense')">
           </div>
           <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
             <button type="submit" class="btn btn-primary add-button">

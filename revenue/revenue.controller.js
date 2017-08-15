@@ -14,6 +14,7 @@
     vm.submitNewItem = submitNewItem;
     vm.removeLine = removeLine;
     vm.resetInput = resetInput;
+    vm.resetErrors = resetErrors;
 
     function onInit() {
       console.log('Loaded');
@@ -271,22 +272,29 @@
       }
     }
 
-    function resetInput(whichForm) {
-      if (whichForm == 'expense') {
-        vm.newExpense = {};
+    function resetErrors(errorSet) {
+      if (errorSet == 'expense') {
         vm.expenseErrors = {
           description: false,
           atLeastOne: false,
           correctInput: false
         };
       } else {
-        vm.newRev = {};
         vm.revenueErrors = {
           description: false,
           atLeastOne: false,
           correctInput: false
         };
       }
+    }
+
+    function resetInput(whichForm) {
+      if (whichForm == 'expense') {
+        vm.newExpense = {};
+      } else {
+        vm.newRev = {};
+      }
+      vm.resetErrors(whichForm)
     }
 
   }
