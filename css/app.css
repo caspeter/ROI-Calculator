@@ -6,6 +6,10 @@ main.container {
   margin-bottom: 4em;
 }
 
+.headding {
+  padding-left: 1em;
+}
+
 .add-button {
   position: absolute;
   bottom: -4.75em;
@@ -26,10 +30,6 @@ main.container {
     position: relative;
     bottom: 0;
   }
-}
-
-.has-error {
-  color: red;
 }
 
 .alert{
