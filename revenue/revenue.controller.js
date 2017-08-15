@@ -70,10 +70,11 @@
 
     function checkValidNumber(number) {
       const checkValid = /^\d*\.?\d{0,2}$/;
-      if (number.includes('e')) {
+      if (typeof number == 'string') {
         return false;
+      } else {
+        return checkValid.test(number);
       }
-      return checkValid.test(number);
     }
 
     function submitNewItem(location, newItem) {
