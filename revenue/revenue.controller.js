@@ -74,7 +74,7 @@
         return false;
       } else {
         return checkValid.test(number);
-      }
+      };
     }
 
     function submitNewItem(location, newItem) {
@@ -88,7 +88,7 @@
         } else {
           console.log('something in description');
           vm.revenueErrors.description = false;
-        }
+        };
         //if there isn't a number in either of the number entries throw an error
         if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
           console.log('nothing in either number inputs');
@@ -97,7 +97,7 @@
         } else {
           console.log('something in at least one input');
           vm.revenueErrors.atLeastOne = false;
-        }
+        };
         //there is a description and at least one number filled out
         if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false) {
           if (!newItem.oneTime) {
@@ -113,7 +113,7 @@
             } else {
               console.log('invalid input in monthly');
               vm.revenueErrors.correctInput = true;
-            }
+            };
           } else if (!newItem.monthly) {
             if (checkValidNumber(newItem.oneTime)) {
               console.log('should be valid input in one time');
@@ -126,7 +126,7 @@
             } else {
               console.log('not balid input in one time');
               vm.revenueErrors.correctInput = true;
-            }
+            };
           } else {
             console.log('something in all three fields');
             if (checkValidNumber(newItem.oneTime) && checkValidNumber(newItem.monthly)) {
@@ -137,52 +137,71 @@
             } else {
               console.log('there is an invalid value in one of the inputs');
               vm.revenueErrors.correctInput = true;
-            }
-          }
-          // if (newItem == vm.newRev) {
-          //   vm.newRev = {};
-          // } else if (newItem == vm.newExpense) {
-          //   vm.newExpense = {};
-          // }
+            };
+          };
         }
         // EXPENSE ///////////////////////////
       } else {
+        console.log('it is revenue');
         //if there isn't a description throw an error
         if (newItem.description === undefined || (newItem.description == '')) {
           vm.expenseErrors.description = true;
+          console.log('nothing in description');
         } else {
+          console.log('something in description');
           vm.expenseErrors.description = false;
-        }
+        };
         //if there isn't a number in either of the number entries throw an error
         if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
           vm.expenseErrors.atLeastOne = true;
+          vm.expenseErrors.correctInput = false;
+          console.log('nothing in either number inputs');
         } else {
+          console.log('something in at least one input');
           vm.expenseErrors.atLeastOne = false;
         }
-
-        //if everything is happy run this
-        if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false && vm.expenseErrors.correctInput == false) {
+        //there is a description and at least one number filled out
+        if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false) {
           if (!newItem.oneTime) {
-            location.push({
-              description: newItem.description,
-              oneTime: 0,
-              monthly: newItem.monthly})
+            console.log('there is no one time input');
+            if (checkValidNumber(newItem.monthly)) {
+              console.log('should be a valid input in monthly');
+              vm.expenseErrors.correctInput = false;
+              location.push({
+                description: newItem.description,
+                oneTime: 0,
+                monthly: newItem.monthly});
+                recalculate(newItem);
+            } else {
+              console.log('invalid input in monthly');
+              vm.expenseErrors.correctInput = true;
+            };
           } else if (!newItem.monthly) {
-            location.push({
-              description: newItem.description,
-              oneTime: newItem.oneTime,
-              monthly: 0})
+            if (checkValidNumber(newItem.oneTime)) {
+              vm.expenseErrors.correctInput = false;
+              console.log('should be valid one time input');
+              location.push({
+                description: newItem.description,
+                oneTime: newItem.oneTime,
+                monthly: 0});
+              recalculate(newItem);
+            } else {
+              console.log('invalid input in one time');
+              vm.expenseErrors.correctInput = true;
+            };
           } else {
-            location.push(newItem);
-            console.log(location);
-          }
-          if (newItem == vm.newRev) {
-            vm.newRev = {};
-          } else if (newItem == vm.newExpense) {
-            vm.newExpense = {};
-          }
-          recalculate(newItem);
-        }
+            if (checkValidNumber(newItem.oneTime) && checkValidNumber(newItem.monthly)) {
+              console.log('something in all fields and values are valid');
+              vm.expenseErrors.correctInput = false;
+              location.push(newItem);
+              console.log(location);
+              recalculate(newItem);
+            } else {
+              console.log('there is an invalid value in one of the inputs');
+              vm.expenseErrors.correctInput = true;
+            };
+          };
+        };
       }
     }
 
