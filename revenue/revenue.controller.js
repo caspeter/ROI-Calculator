@@ -70,66 +70,81 @@
 
     function checkValidNumber(number) {
       const checkValid = /^\d*\.?\d{0,2}$/;
+      if (number.includes('e')) {
+        return false;
+      }
       return checkValid.test(number);
     }
 
     function submitNewItem(location, newItem) {
       //if it is revenue
       if (newItem == vm.newRev) {
+        console.log('it is revenue');
         //if there isn't a description throw an error
         if (newItem.description === undefined || (newItem.description == '')) {
           vm.revenueErrors.description = true;
+          console.log('nothing in description');
         } else {
+          console.log('something in description');
           vm.revenueErrors.description = false;
         }
         //if there isn't a number in either of the number entries throw an error
         if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+          console.log('nothing in either number inputs');
           vm.revenueErrors.atLeastOne = true;
-        }
-        //if the number are invalid
-        //if onetime is valid or blank, be true. if monthly is valid or blank be true. if both are true, clear all errors, if they are false they will be turned true with the ! and will set the correct input error
-        else if (!((checkValidNumber(newItem.oneTime) || newItem.oneTime == '') && (checkValidNumber(newItem.monthly) || newItem.monthly == ''))) {
-          vm.revenueErrors.correctInput = true;
-          vm.revenueErrors.atLeastOne = false;
-        }
-        else {
-          vm.revenueErrors.atLeastOne = false;
           vm.revenueErrors.correctInput = false;
+        } else {
+          console.log('something in at least one input');
+          vm.revenueErrors.atLeastOne = false;
         }
-
-        // if ((checkValidNumber(newItem.oneTime) || newItem.oneTime == '') && (checkValidNumber(newItem.monthly) || newItem.monthly == '')) {
-        //   console.log('both look good');
-        //   vm.revenueErrors.correctInput = false;
-        // } else {
-        //   vm.revenueErrors.correctInput = true;
-        //   //dont want errors over lapping eachother
-        //   vm.revenueErrors.atLeastOne = false;
-        // }
-
-        //if everything is happy run this
-        if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false && vm.revenueErrors.correctInput == false) {
+        //there is a description and at least one number filled out
+        if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false) {
           if (!newItem.oneTime) {
-            location.push({
-              description: newItem.description,
-              oneTime: 0,
-              monthly: newItem.monthly})
+            console.log('there is no one time input');
+            if (checkValidNumber(newItem.monthly)) {
+              console.log('should be a valid input in monthly');
+              vm.revenueErrors.correctInput = false;
+              location.push({
+                description: newItem.description,
+                oneTime: 0,
+                monthly: newItem.monthly})
+                recalculate(newItem);
+            } else {
+              console.log('invalid input in monthly');
+              vm.revenueErrors.correctInput = true;
+            }
           } else if (!newItem.monthly) {
-            location.push({
-              description: newItem.description,
-              oneTime: newItem.oneTime,
-              monthly: 0})
+            if (checkValidNumber(newItem.oneTime)) {
+              console.log('should be valid input in one time');
+              vm.revenueErrors.correctInput = false;
+              location.push({
+                description: newItem.description,
+                oneTime: newItem.oneTime,
+                monthly: 0});
+                recalculate(newItem);
+            } else {
+              console.log('not balid input in one time');
+              vm.revenueErrors.correctInput = true;
+            }
           } else {
-            location.push(newItem);
-            console.log(location);
+            console.log('something in all three fields');
+            if (checkValidNumber(newItem.oneTime) && checkValidNumber(newItem.monthly)) {
+              console.log('something in all fields and values are valid');
+              location.push(newItem);
+              vm.revenueErrors.correctInput = false;
+              recalculate(newItem);
+            } else {
+              console.log('there is an invalid value in one of the inputs');
+              vm.revenueErrors.correctInput = true;
+            }
           }
-          if (newItem == vm.newRev) {
-            vm.newRev = {};
-          } else if (newItem == vm.newExpense) {
-            vm.newExpense = {};
-          }
-          recalculate();
+          // if (newItem == vm.newRev) {
+          //   vm.newRev = {};
+          // } else if (newItem == vm.newExpense) {
+          //   vm.newExpense = {};
+          // }
         }
-        //for EXPENSE
+        // EXPENSE ///////////////////////////
       } else {
         //if there isn't a description throw an error
         if (newItem.description === undefined || (newItem.description == '')) {
@@ -165,7 +180,7 @@
           } else if (newItem == vm.newExpense) {
             vm.newExpense = {};
           }
-          recalculate();
+          recalculate(newItem);
         }
       }
     }
@@ -217,7 +232,7 @@
       }
     }
 
-    function recalculate() {
+    function recalculate(newItem) {
       vm.totalOneTimeExpense = calculateTotals(vm.allExpense, 'oneTime');
       vm.totalMonthlyExpense = calculateTotals(vm.allExpense, 'monthly');
       vm.totalOneTimeRevenue = calculateTotals(vm.allRev, 'oneTime');
@@ -228,6 +243,11 @@
       vm.contributionProfit = totalContributionProfit();
       vm.contributionMargin = Math.round(calculateContributionMargin() * 100) / 100;
       vm.capitalROI = Math.round(calculateCapitalROI() * 10) / 10;
+      if (newItem == vm.newRev) {
+        vm.newRev = {};
+      } else if (newItem == vm.newExpense) {
+        vm.newExpense = {};
+      }
     }
 
   }
