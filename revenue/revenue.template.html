@@ -150,15 +150,25 @@
           </tr>
           <tr>
             <td>Expenses</td>
-            <td>{{$ctrl.totalOneTimeExpense | currency}}</td>
-            <td>{{$ctrl.totalMonthlyExpense | currency}}</td>
-            <td>{{$ctrl.totalExpense | currency}}</td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Sum of all one time expenses." onmouseenter="$(this).tooltip('show')">{{$ctrl.totalOneTimeExpense | currency}}</a>
+              </td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Sum of all monthly expenses." onmouseenter="$(this).tooltip('show')">{{$ctrl.totalMonthlyExpense | currency}}</a>
+              </td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Total monthly expenses multiplied by 12 months then added to total one time expenses." onmouseenter="$(this).tooltip('show')">{{$ctrl.totalExpense | currency}}</a>
+              </td>
           </tr>
           <tr>
             <td></td>
             <td>Contribution Profit</td>
-            <td>{{$ctrl.monthlyContributionProfit | currency}}</td>
-            <td>{{$ctrl.contributionProfit | currency}}</td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Total monthly revenue - total monthly expense." onmouseenter="$(this).tooltip('show')" >{{$ctrl.monthlyContributionProfit | currency}}</a>
+              </td>
+            <td>
+              <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="top" title="Total Revenue minus Total Expenses." onmouseenter="$(this).tooltip('show')" >{{$ctrl.contributionProfit | currency}}</a>
+              </td>
           </tr>
         </tbody>
 
@@ -168,11 +178,11 @@
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 calc-display">
 
       <br>
-      <h4>Total Contribution Profit {{$ctrl.contributionProfit | currency}}</h4>
+      <h4>Total Contribution Profit <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="right" title="Total Revenue minus Total Expenses." onmouseenter="$(this).tooltip('show')" >{{$ctrl.contributionProfit | currency}}</a></h4>
       <br>
-      <h4>Contribution Margin {{$ctrl.contributionMargin}}%</h4>
+      <h4>Contribution Margin <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="right" title="Total Contribution Profit divided by Total Revenue." onmouseenter="$(this).tooltip('show')" >{{$ctrl.contributionMargin}}%</a></h4>
       <br>
-      <h4>Captial ROI (Months) = {{$ctrl.capitalROI}}</h4>
+      <h4>Captial ROI (Months) = <a type="button" class="number-descriptions" data-toggle="tooltip" data-placement="right" title="One-Time Expenses minus One-Time Revenue then divided by Monthly Contribution Profit." onmouseenter="$(this).tooltip('show')" >{{$ctrl.capitalROI}}</a></h4>
 
     </div>
   </div>
