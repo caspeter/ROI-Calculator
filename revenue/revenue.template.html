@@ -1,154 +1,164 @@
 <main class="container">
   <div class="row">
-<div class="col-lg-6">
+    <div class="col-lg-6">
 
-<h2 class="test-animate">Revenue</h2>
-<div class="row">
-  <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
-    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <label for="descriptionRevenueInput">Description </label>
-        <input class="form-control" name="descriptionRevenueInput"  id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description">
-        <p ng-if="$ctrl.revenueErrors.description" class="alert alert-danger">Please enter description</p>
-      </div>
-    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
-        <label for="oneTimeRevenueInput">One Time </label>
-        <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime">
-        <p ng-if="$ctrl.revenueErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
-        <p ng-if="$ctrl.revenueErrors.correctInput" class="alert alert-danger">Whoops, invalid revenue!</p>
-      </div>
-    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
-        <label for="monthlyRevenueInput">Monthly Revenue</label>
-        <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly">
-      </div>
-      <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        <button type="submit" class="btn btn-primary add-button">
+      <h2 class="test-animate">Revenue</h2>
+      <div class="row">
+        <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
+          <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <label for="descriptionRevenueInput">Description </label>
+            <input class="form-control" name="descriptionRevenueInput" id="descriptionRevenueInput" placeholder="Description" ng-model="$ctrl.newRev.description">
+            <p ng-if="$ctrl.revenueErrors.description" class="alert alert-danger">Please enter description</p>
+          </div>
+          <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+            <label for="oneTimeRevenueInput">One Time </label>
+            <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime">
+            <p ng-if="$ctrl.revenueErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
+            <p ng-if="$ctrl.revenueErrors.correctInput" class="alert alert-danger">Whoops, invalid revenue!</p>
+          </div>
+          <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+            <label for="monthlyRevenueInput">Monthly Revenue</label>
+            <input type="number" class="form-control" id="monthlyRevenueInput" placeholder="Monthly Revenue" ng-model="$ctrl.newRev.monthly">
+          </div>
+          <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <button type="submit" class="btn btn-primary add-button">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
-      </div>
-  </form>
-</div>
-
-  <table class="table table-hover">
-
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>One Time</th>
-      <th>Monthly</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="item in $ctrl.allRev">
-      <td>{{item.description}}</td>
-      <td>{{item.oneTime | currency}}</td>
-      <td>{{item.monthly | currency}}</td>
-      <td ng-click="$ctrl.removeLine($ctrl.allRev, item)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
-    </tr>
-  </tbody>
-
-</table>
-</div>
-
-<div class="col-lg-6">
-
-<h2>Expenses</h2>
-<div class="row">
-  <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
-    <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <label for="descriptionExpenseInput">Description </label>
-        <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description"  ng-minlength="3">
-        <p ng-if="$ctrl.expenseErrors.description" class="alert alert-danger">Please enter description</p>
-      </div>
-    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
-      <label for="one-timeExpenseInput">One Time </label>
-        <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined">
-        <p ng-if="$ctrl.expenseErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
-        <p ng-if="$ctrl.expenseErrors.correctInput" class="alert alert-danger">Whoops, invalid expense!</p>
-      </div>
-    <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
-        <label for="monthlyExpenseInput">Monthly Revenue</label>
-        <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined">
-      </div>
-      <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        <button type="submit" class="btn btn-primary add-button">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </div>
+        </form>
+          <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="$ctrl.resetInput('revenue')">
+            <button class="btn btn-primary add-button">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         </button>
+          </div>
       </div>
-  </form>
-</div>
 
-  <table class="table table-hover">
+      <table class="table table-hover">
 
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>One Time</th>
-      <th>Monthly</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="item in $ctrl.allExpense">
-      <td>{{item.description}}</td>
-      <td>{{item.oneTime | currency}}</td>
-      <td>{{item.monthly | currency}}</td>
-      <td><span ng-click="$ctrl.removeLine($ctrl.allExpense, item)" class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
-    </tr>
-  </tbody>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>One Time</th>
+            <th>Monthly</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in $ctrl.allRev">
+            <td>{{item.description}}</td>
+            <td>{{item.oneTime | currency}}</td>
+            <td>{{item.monthly | currency}}</td>
+            <td ng-click="$ctrl.removeLine($ctrl.allRev, item)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+          </tr>
+        </tbody>
 
-</table>
-</div>
+      </table>
+    </div>
 
-</div>
+    <div class="col-lg-6">
 
-<div class="row">
+      <h2>Expenses</h2>
+      <div class="row">
+        <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
+          <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <label for="descriptionExpenseInput">Description </label>
+            <input class="form-control" id="descriptionExpenseInput" placeholder="Description" ng-model="$ctrl.newExpense.description" ng-minlength="3">
+            <p ng-if="$ctrl.expenseErrors.description" class="alert alert-danger">Please enter description</p>
+          </div>
+          <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+            <label for="one-timeExpenseInput">One Time </label>
+            <input type="number" class="form-control" id="one-timeExpenseInput" placeholder="One Time Expense" ng-model="$ctrl.newExpense.oneTime" ng-required="$ctrl.newExpense.monthly != undefined">
+            <p ng-if="$ctrl.expenseErrors.atLeastOne" class="alert alert-danger">Whoops, you need some numbers!</p>
+            <p ng-if="$ctrl.expenseErrors.correctInput" class="alert alert-danger">Whoops, invalid expense!</p>
+          </div>
+          <div class="form-group col-xs-5 col-sm-3 col-md-3 col-lg-3">
+            <label for="monthlyExpenseInput">Monthly Revenue</label>
+            <input type="number" class="form-control" id="monthlyExpenseInput" placeholder="Monthly Expense" ng-model="$ctrl.newExpense.monthly" ng-required="$crl.newExpense.oneTime != undefined">
+          </div>
+          <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <button type="submit" class="btn btn-primary add-button">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+          <div class="form-group col-xs-1 col-sm-1 col-md-1 col-lg-1" ng-click="$ctrl.resetInput('expense')">
+            <button class="btn btn-primary add-button">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+          </div>
+      </div>
 
-  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-<h2>Totals</h2>
+      <table class="table table-hover">
 
-<table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>One Time</th>
+            <th>Monthly</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in $ctrl.allExpense">
+            <td>{{item.description}}</td>
+            <td>{{item.oneTime | currency}}</td>
+            <td>{{item.monthly | currency}}</td>
+            <td><span ng-click="$ctrl.removeLine($ctrl.allExpense, item)" class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h2>Totals</h2>
+
+      <table class="table">
 
 
-<thead>
-  <tr>
-    <th></th>
-    <th>One Time</th>
-    <th>Monthly</th>
-    <th>Total</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Revenue</td>
-    <td>{{$ctrl.totalOneTimeRevenue | currency}}</td>
-    <td>{{$ctrl.totalMonthlyRevenue | currency}}</td>
-    <td>{{$ctrl.totalRevenue | currency}}</td>
-  </tr>
-  <tr>
-    <td>Expenses</td>
-    <td>{{$ctrl.totalOneTimeExpense | currency}}</td>
-    <td>{{$ctrl.totalMonthlyExpense | currency}}</td>
-    <td>{{$ctrl.totalExpense | currency}}</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>Contribution Profit</td>
-    <td>{{$ctrl.monthlyContributionProfit | currency}}</td>
-    <td>{{$ctrl.contributionProfit | currency}}</td>
-  </tr>
-</tbody>
+        <thead>
+          <tr>
+            <th></th>
+            <th>One Time</th>
+            <th>Monthly</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Revenue</td>
+            <td>{{$ctrl.totalOneTimeRevenue | currency}}</td>
+            <td>{{$ctrl.totalMonthlyRevenue | currency}}</td>
+            <td>{{$ctrl.totalRevenue | currency}}</td>
+          </tr>
+          <tr>
+            <td>Expenses</td>
+            <td>{{$ctrl.totalOneTimeExpense | currency}}</td>
+            <td>{{$ctrl.totalMonthlyExpense | currency}}</td>
+            <td>{{$ctrl.totalExpense | currency}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Contribution Profit</td>
+            <td>{{$ctrl.monthlyContributionProfit | currency}}</td>
+            <td>{{$ctrl.contributionProfit | currency}}</td>
+          </tr>
+        </tbody>
 
-</table>
-</div>
+      </table>
+    </div>
 
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 calc-display">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 calc-display">
 
-<br>
-<h4>Total Contribution Profit {{$ctrl.contributionProfit | currency}}</h4>
-<br>
-<h4>Contribution Margin {{$ctrl.contributionMargin}}%</h4>
-<br>
-<h4>Captial ROI (Months) = {{$ctrl.capitalROI}}</h4>
+      <br>
+      <h4>Total Contribution Profit {{$ctrl.contributionProfit | currency}}</h4>
+      <br>
+      <h4>Contribution Margin {{$ctrl.contributionMargin}}%</h4>
+      <br>
+      <h4>Captial ROI (Months) = {{$ctrl.capitalROI}}</h4>
 
-</div>
+    </div>

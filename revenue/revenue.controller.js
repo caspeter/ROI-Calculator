@@ -13,6 +13,7 @@
     vm.$onInit = onInit;
     vm.submitNewItem = submitNewItem;
     vm.removeLine = removeLine;
+    vm.resetInput = resetInput;
 
     function onInit() {
       console.log('Loaded');
@@ -267,6 +268,24 @@
         vm.newRev = {};
       } else if (newItem == vm.newExpense) {
         vm.newExpense = {};
+      }
+    }
+
+    function resetInput(whichForm) {
+      if (whichForm == 'expense') {
+        vm.newExpense = {};
+        vm.expenseErrors = {
+          description: false,
+          atLeastOne: false,
+          correctInput: false
+        };
+      } else {
+        vm.newRev = {};
+        vm.revenueErrors = {
+          description: false,
+          atLeastOne: false,
+          correctInput: false
+        };
       }
     }
 
