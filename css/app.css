@@ -22,6 +22,10 @@ main.container {
     text-align: center;
     top: 0;
   }
+  .add-button{
+    position: relative;
+    bottom: 0;
+  }
 }
 
 .has-error {

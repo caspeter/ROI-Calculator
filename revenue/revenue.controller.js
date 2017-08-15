@@ -18,6 +18,7 @@
 
     function onInit() {
       console.log('Loaded');
+      vm.descriptionMouseover = false;
       vm.revenues = [];
       vm.newRev = {};
       vm.newExpense = {};
