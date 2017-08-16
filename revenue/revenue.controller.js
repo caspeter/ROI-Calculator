@@ -76,10 +76,9 @@
       const checkValid = /^\d*\.?\d{0,2}$/;
       if (typeof number == 'string' || number < 0 || number > 1000000001) {
         return false;
-      } if (number == '' || typeof number == undefined || typeof number == 'object') {
+      } if (number == '' || typeof number == 'undefined' || typeof number == 'object') {
         return true;
-      }
-      else {
+      } else {
         console.log('making it into and out of checkValidNumber functon');
         console.log(typeof number, 'type of');
         console.log(checkValid.test(number), 'check against regex');
@@ -88,24 +87,18 @@
     }
 
     function submitNewRevenue(newItem) {
-      console.log('it is revenue');
       console.log(newItem);
       //if there isn't a description throw an error
-      if (newItem.description === undefined || (newItem.description == '' || newItem.description.length < 0)) {
+      if (newItem.description === undefined || newItem.description == '' || newItem.description.length <= 0) {
         vm.revenueErrors.description = true;
-        console.log('nothing in description');
       } else {
-        console.log('something in description');
         vm.revenueErrors.description = false;
       };
       //if there isn't a number in either of the number entries throw an error
-      if ((!newItem.oneTime || newItem.oneTime == '' || typeof newItem.oneTime == 'string') && (!newItem.monthly || newItem.monthly == '' || newItem.monthly == 'string')) {
-        console.log('nothing in either number inputs');
-        console.log(newItem.oneTime, newItem.monthly);
+      if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
         vm.revenueErrors.atLeastOne = true;
         vm.revenueErrors.correctInput = false;
       } else {
-        console.log('something in at least one input');
         vm.revenueErrors.atLeastOne = false;
         vm.revenueErrors.correctInput = false;
       };
@@ -113,82 +106,49 @@
       if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false && checkValidNumber(newItem.monthly) && checkValidNumber(newItem.oneTime)) {
         vm.revenueErrors.correctInput = false;
         if (!newItem.oneTime) {
-          console.log('there is no one time input');
-            vm.revenueErrors.correctInput = false;
-            vm.allRev.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly})
-            recalculate(newItem);
-
+            vm.allRev.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly});
         } else if (!newItem.monthly) {
-            vm.revenueErrors.correctInput = false;
             vm.allRev.push({description: newItem.description, oneTime: newItem.oneTime, monthly: 0});
-            recalculate(newItem);
         } else {
-          console.log('something in all three fields');
-            vm.allRev.push(newItem);
-            vm.revenueErrors.correctInput = false;
-            recalculate(newItem);
+          vm.allRev.push(newItem);
         };
+        recalculate(newItem);
       } else {
-        console.log('not valid for either inputs');
         vm.revenueErrors.correctInput = true;
       }
     }
 
     function submitNewExpense(newItem) {
-      console.log('it is expense');
+      console.log(newItem);
       //if there isn't a description throw an error
-      if (newItem.description === undefined || (newItem.description == '' || newItem.description.length < 0)) {
+      if (newItem.description === undefined || (newItem.description == '' || newItem.description.length <= 0)) {
         vm.expenseErrors.description = true;
-        console.log('nothing in description');
       } else {
-        console.log('something in description');
         vm.expenseErrors.description = false;
       };
       //if there isn't a number in either of the number entries throw an error
-      if ((!newItem.oneTime || newItem.oneTime == '' || typeof newItem.oneTime == 'string') && (!newItem.monthly || newItem.monthly == '' || typeof newItem.monthly == 'string')) {
+      if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
         vm.expenseErrors.atLeastOne = true;
         vm.expenseErrors.correctInput = false;
-        console.log('nothing in either number inputs');
       } else {
-        console.log('something in at least one input');
         vm.expenseErrors.atLeastOne = false;
+        vm.expenseErrors.correctInput = false;
       }
       //there is a description and at least one number filled out
-      if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false) {
+      if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false && checkValidNumber(newItem.monthly) && checkValidNumber(newItem.oneTime)) {
+        vm.expenseErrors.correctInput = false;
         if (!newItem.oneTime) {
-          console.log('there is no one time input');
-          if (checkValidNumber(newItem.monthly)) {
-            console.log('should be a valid input in monthly');
-            vm.expenseErrors.correctInput = false;
             vm.allExpense.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly});
-            recalculate(newItem);
-          } else {
-            console.log('invalid input in monthly');
-            vm.expenseErrors.correctInput = true;
-          };
         } else if (!newItem.monthly) {
-          if (checkValidNumber(newItem.oneTime)) {
-            vm.expenseErrors.correctInput = false;
-            console.log('should be valid one time input');
             vm.allExpense.push({description: newItem.description, oneTime: newItem.oneTime, monthly: 0});
-            recalculate(newItem);
-          } else {
-            console.log('invalid input in one time');
-            vm.expenseErrors.correctInput = true;
-          };
         } else {
-          if (checkValidNumber(newItem.oneTime) && checkValidNumber(newItem.monthly)) {
-            console.log('something in all fields and values are valid');
             vm.expenseErrors.correctInput = false;
             vm.allExpense.push(newItem);
-            console.log(location);
-            recalculate(newItem);
-          } else {
-            console.log('there is an invalid value in one of the inputs');
-            vm.expenseErrors.correctInput = true;
-          };
         };
-      };
+        recalculate(newItem);
+      } else {
+        vm.expenseErrors.correctInput = true;
+      }
     }
 
     function removeLine(array, line) {

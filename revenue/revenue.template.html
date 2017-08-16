@@ -15,7 +15,7 @@
           <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
             <label for="oneTimeRevenueInput">One Time </label>
             <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Cannot be a negative number, cannot include letters,  decimals cannot exceed 2 places and cannot be over 1 billion per input." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
-            <input type="number" name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" ng-click="$ctrl.resetErrors('revenue')">
+            <input type="number"  name="oneTimeRevenueInput" class="form-control" id="oneTimeRevenueInput" placeholder="One Time Revenue" ng-model="$ctrl.newRev.oneTime" ng-click="$ctrl.resetErrors('revenue')">
             <p ng-if="$ctrl.revenueErrors.atLeastOne || $ctrl.revenueErrors.correctInput" class="alert alert-danger">Invalid Input(s)</p>
           </div>
           <div class="form-group col-xs-6 col-sm-3 col-md-3 col-lg-3">
