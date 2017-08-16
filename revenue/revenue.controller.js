@@ -73,21 +73,25 @@
     }
 
     function checkValidNumber(number) {
+      console.log('getting here');
+      let newNumber = parseInt(number);
+      console.log(newNumber);
       const checkValid = /^\d*\.?\d{0,2}$/;
-      if (typeof number == 'string' || number < 0 || number > 1000000001) {
+      if (newNumber == NaN || newNumber < 0 || newNumber > 1000000001) {
         return false;
-      } if (number == '' || typeof number == 'undefined' || typeof number == 'object') {
+      } else if (number == null) {
         return true;
-      } else {
+      }
+      else {
         console.log('making it into and out of checkValidNumber functon');
-        console.log(typeof number, 'type of');
-        console.log(checkValid.test(number), 'check against regex');
-        return checkValid.test(number);
+        console.log(vm.newRev);
+        console.log(checkValid.test(newNumber), 'check against regex');
+        return checkValid.test(newNumber);
       };
     }
 
     function submitNewRevenue(newItem) {
-      console.log(newItem);
+      // console.log(newItem);
       //if there isn't a description throw an error
       if (newItem.description === undefined || newItem.description == '' || newItem.description.length <= 0) {
         vm.revenueErrors.description = true;
