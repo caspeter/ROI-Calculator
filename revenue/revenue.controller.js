@@ -21,8 +21,12 @@
       console.log('Loaded');
       vm.easterEgg = false;
       vm.revenues = [];
-      vm.newRev = {};
-      vm.newExpense = {};
+      vm.newRev = {description: null,
+      oneTime: null,
+      monthly: null};
+      vm.newExpense = {description: null,
+      oneTime: null,
+      monthly: null};
       vm.totalOneTimeRevenue = 0;
       vm.totalMonthlyRevenue = 0;
       vm.totalRevenue = 0;
@@ -45,26 +49,26 @@
       };
       vm.allRev = [
         {
-          description: 'text1',
+          description: 'Revenue 1',
           oneTime: 100,
           monthly: 50
         }, {
-          description: 'text2',
+          description: 'Revenue 2',
           oneTime: 50,
           monthly: 25
         }, {
-          description: 'text3',
+          description: 'Revenue 3',
           oneTime: 25,
           monthly: 85
         }
       ];
       vm.allExpense = [
         {
-          description: 'expense1',
+          description: 'Expense 1',
           oneTime: 500,
           monthly: 20
         }, {
-          description: 'expense2',
+          description: 'Expense 2',
           oneTime: 200,
           monthly: 40
         }
@@ -73,33 +77,31 @@
     }
 
     function checkValidNumber(number) {
-      console.log('getting here');
+      console.log('getting into checkValidNumber');
       let newNumber = parseInt(number);
       console.log(newNumber);
-      const checkValid = /^\d*\.?\d{0,2}$/;
-      if (newNumber == NaN || newNumber < 0 || newNumber > 1000000001) {
+      const checkValid = /^\d*\.?\d{0,2}?$/;
+      if (Number.isNaN(newNumber)) {
         return false;
-      } else if (number == null) {
-        return true;
-      }
-      else {
+      } else if (newNumber < 0 || newNumber > 1000000001) {
+        return false;
+      } else {
         console.log('making it into and out of checkValidNumber functon');
-        console.log(vm.newRev);
-        console.log(checkValid.test(newNumber), 'check against regex');
-        return checkValid.test(newNumber);
+        console.log(checkValid.test(number), 'check against regex');
+        return checkValid.test(number);
       };
     }
 
-    function submitNewRevenue(newItem) {
-      // console.log(newItem);
+    function submitNewRevenue() {
       //if there isn't a description throw an error
-      if (newItem.description === undefined || newItem.description == '' || newItem.description.length <= 0) {
+      if (vm.newRev.description === undefined || vm.newRev.description == '' || vm.newRev.description.length <= 0) {
         vm.revenueErrors.description = true;
+        vm.revenueErrors.atLeastOne = false;
       } else {
         vm.revenueErrors.description = false;
       };
       //if there isn't a number in either of the number entries throw an error
-      if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+      if ((!vm.newRev.oneTime || vm.newRev.oneTime == '') && (!vm.newRev.monthly || vm.newRev.monthly == '')) {
         vm.revenueErrors.atLeastOne = true;
         vm.revenueErrors.correctInput = false;
       } else {
@@ -107,31 +109,45 @@
         vm.revenueErrors.correctInput = false;
       };
       //there is a description and at least one number filled out
-      if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false && checkValidNumber(newItem.monthly) && checkValidNumber(newItem.oneTime)) {
+      if (vm.revenueErrors.description == false && vm.revenueErrors.atLeastOne == false) {
         vm.revenueErrors.correctInput = false;
-        if (!newItem.oneTime) {
-            vm.allRev.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly});
-        } else if (!newItem.monthly) {
-            vm.allRev.push({description: newItem.description, oneTime: newItem.oneTime, monthly: 0});
+        if (!vm.newRev.oneTime) {
+          if (checkValidNumber(vm.newRev.monthly)) {
+            vm.allRev.push({description: vm.newRev.description, oneTime: 0, monthly: vm.newRev.monthly});
+            recalculate(vm.newRev);
+          } else {
+            vm.revenueErrors.correctInput = true;
+          }
+        } else if (!vm.newRev.monthly) {
+          if (checkValidNumber(vm.newRev.oneTime)) {
+            vm.allRev.push({description: vm.newRev.description, oneTime: vm.newRev.oneTime, monthly: 0});
+            recalculate(vm.newRev);
+          } else {
+            vm.revenueErrors.correctInput = true;
+          }
         } else {
-          vm.allRev.push(newItem);
+          if (checkValidNumber(vm.newRev.monthly) && checkValidNumber(vm.newRev.oneTime)) {
+            vm.allRev.push(vm.newRev);
+            recalculate(vm.newRev);
+          } else {
+            vm.revenueErrors.correctInput = true;
+          }
         };
-        recalculate(newItem);
       } else {
         vm.revenueErrors.correctInput = true;
       }
     }
 
-    function submitNewExpense(newItem) {
-      console.log(newItem);
+    function submitNewExpense() {
       //if there isn't a description throw an error
-      if (newItem.description === undefined || (newItem.description == '' || newItem.description.length <= 0)) {
+      if (vm.newExpense.description === undefined || (vm.newExpense.description == '' || vm.newExpense.description.length <= 0)) {
         vm.expenseErrors.description = true;
+        vm.expenseErrors.atLeastOne = false;
       } else {
         vm.expenseErrors.description = false;
       };
       //if there isn't a number in either of the number entries throw an error
-      if ((!newItem.oneTime || newItem.oneTime == '') && (!newItem.monthly || newItem.monthly == '')) {
+      if ((!vm.newExpense.oneTime || vm.newExpense.oneTime == '') && (!vm.newExpense.monthly || vm.newExpense.monthly == '')) {
         vm.expenseErrors.atLeastOne = true;
         vm.expenseErrors.correctInput = false;
       } else {
@@ -139,17 +155,30 @@
         vm.expenseErrors.correctInput = false;
       }
       //there is a description and at least one number filled out
-      if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false && checkValidNumber(newItem.monthly) && checkValidNumber(newItem.oneTime)) {
+      if (vm.expenseErrors.description == false && vm.expenseErrors.atLeastOne == false) {
         vm.expenseErrors.correctInput = false;
-        if (!newItem.oneTime) {
-            vm.allExpense.push({description: newItem.description, oneTime: 0, monthly: newItem.monthly});
-        } else if (!newItem.monthly) {
-            vm.allExpense.push({description: newItem.description, oneTime: newItem.oneTime, monthly: 0});
+        if (!vm.newExpense.oneTime) {
+          if (checkValidNumber(vm.newExpense.monthly)) {
+            vm.allExpense.push({description: vm.newExpense.description, oneTime: 0, monthly: vm.newExpense.monthly});
+            recalculate(vm.newExpense);
+          } else {
+            vm.expenseErrors.correctInput = true;
+          }
+        } else if (!vm.newExpense.monthly) {
+          if (checkValidNumber(vm.newExpense.oneTime)) {
+            vm.allExpense.push({description: vm.newExpense.description, oneTime: vm.newExpense.oneTime, monthly: 0});
+            recalculate(vm.newExpense);
+          } else {
+            vm.expenseErrors.correctInput = true;
+          }
         } else {
-            vm.expenseErrors.correctInput = false;
-            vm.allExpense.push(newItem);
+          if (checkValidNumber(vm.newExpense.monthly) && checkValidNumber(vm.newExpense.oneTime)) {
+            vm.allExpense.push(vm.newExpense);
+            recalculate(vm.newExpense);
+          } else {
+            vm.expenseErrors.correctInput = true;
+          }
         };
-        recalculate(newItem);
       } else {
         vm.expenseErrors.correctInput = true;
       }
@@ -203,6 +232,7 @@
     }
 
     function recalculate(newItem) {
+      vm.easterEgg = false;
       vm.totalOneTimeExpense = calculateTotals(vm.allExpense, 'oneTime');
       vm.totalMonthlyExpense = calculateTotals(vm.allExpense, 'monthly');
       vm.totalOneTimeRevenue = calculateTotals(vm.allRev, 'oneTime');
@@ -214,9 +244,15 @@
       vm.contributionMargin = Math.round(calculateContributionMargin() * 100) / 100;
       vm.capitalROI = Math.round(calculateCapitalROI() * 10) / 10;
       if (newItem == vm.newRev) {
-        vm.newRev = {};
+        vm.newRev = {
+          description: null,
+          oneTime: null,
+          monthly: null
+        };
       } else if (newItem == vm.newExpense) {
-        vm.newExpense = {};
+        vm.newExpense = {description: null,
+        oneTime: null,
+        monthly: null};
       }
     }
 
