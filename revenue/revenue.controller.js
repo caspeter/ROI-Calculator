@@ -18,7 +18,6 @@
     vm.resetErrors = resetErrors;
 
     function onInit() {
-      console.log('Loaded');
       vm.easterEgg = false;
       vm.revenues = [];
       vm.newRev = {description: null,
@@ -77,17 +76,13 @@
     }
 
     function checkValidNumber(number) {
-      console.log('getting into checkValidNumber');
       let newNumber = parseInt(number);
-      console.log(newNumber);
       const checkValid = /^\d*\.?\d{0,2}?$/;
       if (Number.isNaN(newNumber)) {
         return false;
       } else if (newNumber < 0 || newNumber > 1000000001) {
         return false;
       } else {
-        console.log('making it into and out of checkValidNumber functon');
-        console.log(checkValid.test(number), 'check against regex');
         return checkValid.test(number);
       };
     }
