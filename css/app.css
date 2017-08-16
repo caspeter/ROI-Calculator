@@ -33,7 +33,7 @@ main.container {
 }
 
 .alert{
-  position: fixed;
+  position: absolute;
   margin-top: 1em;
   z-index: 100;
 }

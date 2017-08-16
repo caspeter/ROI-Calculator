@@ -4,7 +4,7 @@
 
       <h2 class="test-animate">Revenue</h2>
       <div class="row">
-        <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewItem($ctrl.allRev, $ctrl.newRev)">
+        <form novalidate name="$ctrl.newRevenueForm" ng-submit="$ctrl.submitNewRevenue($ctrl.newRev)">
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <label for="descriptionRevenueInput">Description
              </label>
@@ -62,7 +62,7 @@
 
       <h2>Expenses</h2>
       <div class="row">
-        <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewItem($ctrl.allExpense, $ctrl.newExpense)">
+        <form novalidate name="$ctrl.newExpenseForm" ng-submit="$ctrl.submitNewExpense($ctrl.newExpense)">
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <label for="descriptionExpenseInput">Description </label>
             <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Must be at least one character long and no more than 30 characters." onmouseenter="$(this).tooltip('show')"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
